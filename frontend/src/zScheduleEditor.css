@@ -1,0 +1,255 @@
+:root {
+  --overlay-color: transparent;
+  --day: #e5dcb9;
+  --night: rgb(30, 40, 48);
+
+  --subdivisions: 4;
+  --cell-height: calc(36px / var(--subdivisions));
+  --compressed-cell-height: calc(16px / var(--subdivisions));
+
+  --vert-border-color: rgba(150, 90, 0, 0.55);
+  --vert-filled-border-color: rgba(24, 40, 13, 0.55);
+  --vert-border-width: 1px;
+
+  --horz-hour-border-color: var(--vert-border-color);
+  --horz-half-border-color: var(--vert-border-color);
+  --horz-hour-filled-border-color: var(--vert-filled-border-color);
+  --horz-half-filled-border-color: var(--vert-filled-border-color);
+  --horz-border-height: 1px;
+
+  --empty-cell-color: var(--background-color);
+  --filled-cell-color: rgba(118, 169, 92, 0.8);
+
+  --expand-delay: 500ms;
+
+  --chunk-border-thickness: 1px;
+  --chunk-border-color: black;
+
+  --times-width: 73px;
+
+  --se-overlay-border-thickness: 1px;
+  --se-overlay-border-color: black; /* Must be black bc multiply */
+  --se-overlay-special-border-thickness: 1px;
+  --se-overlay-special-border-color: white;
+  --se-overlay-pinned-border-color: white;
+}
+
+/* Main */
+
+/*#ScheduleEditorOuter {*/
+/*  position: sticky;*/
+/*  top: 20px;*/
+/*}*/
+#ScheduleEditorInner {
+  position: relative;
+  border-radius: var(--outer-border-radius);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: var(--base-color);
+}
+
+#ScheduleEditorOverlay {
+  cursor: pointer;
+  position: absolute;
+  border-radius: calc(var(--outer-border-radius) - 1px);
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  background-color: var(--overlay-color);
+}
+#ScheduleEditorOverlay:focus {
+
+  border: 2px solid black;
+}
+
+#ScheduleEditorTop {
+  width: 100%;
+  padding: 5px 0 0;
+  line-height: 25px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--dark-text-color);
+  white-space: nowrap;
+}
+#ScheduleEditorTop > p {
+  display: inline-block;
+  margin-right: 3px;
+  color: var(--dark-text-color);
+}
+#ScheduleEditorHeaders {
+  width: 100%;
+  padding-left: var(--times-width);
+  margin: 10px 0 5px;
+}
+#ScheduleEditorHeaders td {
+  font-weight: 500;
+}
+#Unavailable,
+#Available {
+  display: inline-block;
+  border: var(--chunk-border-thickness) solid var(--chunk-border-color) !important;
+  height: 23px;
+  margin: 0 3px;
+  padding: 0 6px;
+  color: var(--dark-text-color);
+  background-color: var(--empty-cell-color);
+}
+#Available {
+  color: var(--dark-text-color);
+  background-color: var(--filled-cell-color);
+}
+
+#ScheduleEditorBottom {
+  display: flex;
+}
+
+#ScheduleEditorTimes {
+  flex-shrink: 0;
+  display: grid;
+  width: var(--times-width);
+}
+.ScheduleEditorTimesCell {
+  min-height: 1px;
+  max-height: var(--cell-height);
+  padding-right: 10px;
+  text-align: right;
+}
+.ScheduleEditorTimesContent {
+  position: relative;
+  top: -11px;
+  display: inline-block;
+  font-weight: 500;
+  color: var(--dark-text-color);
+}
+
+#ScheduleEditorInner.notCompressed .notHideWhenCompressed {
+  font-weight: 600;
+  transition-delay: calc(var(--expand-delay) * 2 / 3);
+}
+#ScheduleEditorInner.notCompressed .hideWhenCompressed {
+  opacity: 1;
+  font-weight: 400;
+  transition: opacity calc(var(--expand-delay) * 1 / 3);
+  transition-delay: calc(var(--expand-delay) * 2 / 3);
+}
+#ScheduleEditorInner.compressed .hideWhenCompressed {
+  opacity: 0;
+  transition: opacity calc(var(--expand-delay) * 1 / 3);
+  transition-delay: 0ms;
+}
+
+/* Table */
+
+#ScheduleEditorTableWrapper {
+  flex-grow: 1;
+  position: relative;
+}
+#ScheduleEditorTableInnerWrapper {
+  border-radius: var(--inner-border-radius);
+  border: 1px solid var(--inner-border-color);
+  display: flex;
+  overflow: hidden;
+}
+#ScheduleEditorTable {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  margin: -1px;
+  table-layout: auto;
+  border-collapse: collapse;
+  background: linear-gradient(
+      var(--night) 0%, var(--day) 40%, var(--day) 60%, var(--night) 100%);
+  background-clip: content-box;
+}
+
+#ScheduleEditorTableBody {
+  border: hidden !important;
+}
+
+/* Cells */
+
+.SECell {
+  background-color: var(--empty-cell-color);
+  text-align: center;
+  border-left: var(--vert-border-width) solid var(--vert-border-color);
+}
+.SECell.filled {
+  background-color: var(--filled-cell-color);
+}
+.SERow {
+  transition: height var(--expand-delay);
+  height: var(--cell-height);
+}
+#ScheduleEditorInner.compressed .SERow {
+  height: var(--compressed-cell-height);
+}
+/* Cells: Hour and Half-Hour Markings */
+.SERow.hour {
+  border-top: var(--horz-border-height) solid var(--horz-hour-border-color);
+}
+#ScheduleEditorInner.notCompressed .SERow.half {
+  border-top: var(--horz-border-height) dotted var(--horz-half-border-color);
+}
+/* Cells: Inside Filled Area Borders */
+.SECell.hour.filled {
+  border-top: var(--horz-border-height) solid var(--horz-hour-filled-border-color);
+}
+#ScheduleEditorInner.notCompressed .SECell.half.filled {
+  border-top: var(--horz-border-height) dotted var(--horz-half-filled-border-color);
+}
+.SECell.filled {
+  border-left: var(--vert-border-width) solid var(--vert-filled-border-color);
+}
+/* Cells: Chunk Borders */
+.topEdge {
+  border-top: var(--chunk-border-thickness) solid var(--chunk-border-color) !important;
+}
+.bottomEdge {
+  border-bottom: var(--chunk-border-thickness) solid var(--chunk-border-color) !important;
+}
+.leftEdge {
+  border-left: var(--chunk-border-thickness) solid var(--chunk-border-color) !important;
+}
+.rightEdge {
+  border-right: var(--chunk-border-thickness) solid var(--chunk-border-color) !important;
+}
+/* Accessibility */
+.SECell:focus {
+  border: 3px solid red !important;
+}
+
+/* Overlay */
+
+.SEOverlay {
+  position: absolute;
+  z-index: 1;
+  border: var(--se-overlay-border-thickness) dashed var(--se-overlay-border-color);
+  mix-blend-mode: multiply;
+}
+.SEOverlay.highlighted {
+  z-index: 4;
+  border: var(--se-overlay-special-border-thickness) solid var(--se-overlay-special-border-color);
+  mix-blend-mode: normal;
+}
+.SEOverlay:hover,
+.SEOverlay.highlighted {
+  box-shadow:         0 0 5px 1px black;
+  -o-box-shadow:      0 0 5px 1px black;
+  -moz-box-shadow:    0 0 5px 1px black;
+  -webkit-box-shadow: 0 0 5px 1px black;
+}
+.SEOverlay.pinnedBorder {
+  z-index: 3;
+  border: var(--se-overlay-border-thickness) solid var(--se-overlay-pinned-border-color);
+  background-color: transparent;
+  mix-blend-mode: normal;
+}
+.SEOverlay.pinned {
+  z-index: 2;
+  background-color: transparent;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}

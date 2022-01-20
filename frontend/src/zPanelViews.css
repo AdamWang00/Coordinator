@@ -1,0 +1,90 @@
+#LoginView,
+#CreateGroupView {
+  width: 100%;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+}
+#CreateGroupView {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9500;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--create-group-background-fade-color);
+}
+
+.Panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  border-radius: var(--outer-border-radius);
+  height: clamp(249px, 50%, 300px);
+  width: clamp(400px, 50%, 450px);
+  padding: 30px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--base-color);
+}
+#CreateGroupPanel {
+  height: clamp(372px, 50vh, 450px);
+  width: clamp(400px, 50vw, 500px);
+}
+
+.PanelHeader {
+  line-height: 35px;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: "Noto Sans JP", sans-serif;
+  white-space: nowrap;
+  color: var(--dark-text-color);
+}
+.PanelSubheader {
+  margin: 4px 0 6px;
+  color: var(--dark-text-color);
+}
+.PanelDivider {
+  border-top: 1px solid var(--inner-border-color);
+  padding-top: 4px;
+}
+.PanelText {
+}
+
+.panelButtonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: clamp(240px, 80%, 340px);
+}
+.panelButtonsWrapper.longer {
+  width: 90%;
+}
+.panelButtonsWrapper.justifyContentFlexEnd {
+  justify-content: flex-end;
+}
+.panelButtons {
+  background-color: rgba(255, 250, 245, 0.5);
+  border: 1px solid var(--paper-border-color);
+}
+.panelButtons > .insideTabHighlightable {
+  font-weight: 500;
+  font-size: 13px;
+  border-radius: calc(var(--inner-border-radius) - 1px);
+  padding: 6px 15px;
+}
+
+/* Remove Number Input's Arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge, Opera */
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}

@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  --background-color: #fffaf5;
+  --background-effect-color: rgba(50, 30, 0, 0.15);
+  --background-grid-spacing: 20px;
+
+  --base-color: rgb(231, 195, 146);
+  --paper-border-color: rgb(153, 122, 81);
+
+  --big-text-color: #211608;
+  --big-text-hover-color: #094e00;
+  --dark-text-color: #191106;
+  --gray-text-color: #565656;
+  --light-text-color: white;
+
+  --outer-border-radius: 10px;
+  --inner-border-radius: 5px;
+  --inner-border-color: rgb(119, 95, 66);
+
+  --create-group-background-fade-color: rgba(0, 0, 0, 0.3);
+  --shadow-color: rgba(41, 20, 16, 0.5);
+
+  --hover-delay: 250ms;
+}
+
+*, *::before, *::after {
+  cursor: inherit;
+  box-sizing: border-box;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  color: var(--dark-text-color);
+  background-color: transparent;
+  outline: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  background-position: center;
+  background-color: var(--background-color);
+  background-size: var(--background-grid-spacing) var(--background-grid-spacing);
+  background-image: radial-gradient(circle, var(--background-effect-color) 1px, rgba(0, 0, 0, 0) 1px);
+  height: 100vh;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.paperTexture {
+  border: 1px solid var(--paper-border-color);
+  background-blend-mode: multiply;
+  background-image: url("texturedPaper.png");
+  background-size: 100px;
+  backdrop-filter: brightness(1.15)
+}
+
+.shadow {
+  box-shadow:         0 1px 5px 0 var(--shadow-color);
+  -o-box-shadow:      0 1px 5px 0 var(--shadow-color);
+  -moz-box-shadow:    0 1px 5px 0 var(--shadow-color);
+  -webkit-box-shadow: 0 1px 5px 0 var(--shadow-color);
+}
+.biggerShadow {
+  box-shadow:         0 5px 13px 0 var(--shadow-color);
+  -o-box-shadow:      0 5px 13px 0 var(--shadow-color);
+  -moz-box-shadow:    0 5px 13px 0 var(--shadow-color);
+  -webkit-box-shadow: 0 5px 13px 0 var(--shadow-color);
+}
+.biggestShadow {
+  box-shadow:         0 5px 30px 2px var(--shadow-color);
+  -o-box-shadow:      0 5px 30px 2px var(--shadow-color);
+  -moz-box-shadow:    0 5px 30px 2px var(--shadow-color);
+  -webkit-box-shadow: 0 5px 30px 2px var(--shadow-color);
+}
+
+.noSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome, Edge, Opera and Firefox */
+}
+.semiBold {
+  font-weight: 500;
+}
+.italicized {
+  font-style: italic;
+}
+.cursorPointer {
+  cursor: pointer;
+}
+
+.hasTooltip {
+  position: relative;
+  z-index: 8999;
+}
+.hasTooltip::before {
+  pointer-events: none;
+  content: attr(data-tooltip);
+  transition-delay: calc(var(--hover-delay) / 4);
+  visibility: hidden;
+  position: absolute;
+  z-index: 9000;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border-radius: var(--inner-border-radius);
+  background-color: black;
+  color: white;
+  mix-blend-mode: normal;
+}
+.hasTooltip:hover::before,
+.hasTooltip:focus::before,
+.tabHighlightable:focus .hasTooltip::before {
+  transition-delay: var(--hover-delay);
+  visibility: visible;
+}
+
+.tabHighlightable {
+  position: relative;
+}
+.insideTabHighlightable,
+.insideTabHighlightable:hover,
+.insideTabHighlightable:focus,
+.insideTabHighlightable:active {
+  cursor: pointer;
+  display: block;
+  z-index: inherit;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid transparent;
+  /* Fixing the Safari bug for overflow:visible not working
+     on buttons wrapping around things with shadows: */
+  position: relative;
+}
+.tabHighlightable:focus > .insideTabHighlightable {
+  border: 2px solid black;
+}
+
+div#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+button {
+  cursor: pointer;
+  border-radius: var(--inner-border-radius);
+}
+

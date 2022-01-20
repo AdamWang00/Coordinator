@@ -1,0 +1,69 @@
+.MeetingTimeCardsWrapper {
+  border-radius: var(--inner-border-radius);
+  border: 1px solid var(--inner-border-color);
+  overflow: hidden;
+}
+.MeetingTimeCard {
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 30px;
+  line-height: 30px;
+  background-color: var(--empty-cell-color);
+  border-bottom: 1px solid var(--horz-hour-border-color);
+  overflow: hidden;
+}
+
+.MeetingTimeCard > .insideTabHighlightable {
+  display: flex;
+  align-items: center;
+  border: none;
+}
+.MeetingTimeCard:focus .MeetingTimeColor {
+  min-width: 18px;
+}
+
+.MeetingTimeColor {
+  align-self: stretch;
+  min-width: 20px;
+  display: grid;
+  place-items: center;
+}
+.MeetingTimeContent {
+  white-space: nowrap;
+  align-self: center;
+  padding: 1px 7px 0;
+}
+.MeetingTimeCard:last-child {
+  border-bottom: none;
+}
+
+.PreferenceSelection {
+  white-space: nowrap;
+  border-radius: var(--inner-border-radius);
+  border: 2px solid transparent;
+  padding-right: 5px;
+  margin-left: auto;
+  margin-right: 1px;
+}
+.MeetingTimeCard:focus .PreferenceSelection {
+  margin-right: -1px;
+}
+.PreferenceSelection:focus-within {
+  border-radius: var(--inner-border-radius);
+  border: 2px solid black;
+}
+.PreferenceSelection > span {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.NotPreferred::before {
+  content: "Bad"
+}
+.NeutralPreferred::before {
+  content: "Ok"
+}
+.Preferred::before {
+  content: "Good"
+}
+

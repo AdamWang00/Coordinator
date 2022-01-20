@@ -1,0 +1,133 @@
+.MeetingGroupCard {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: var(--outer-border-radius);
+  background-color: var(--base-color);
+}
+.MeetingGroupCard:last-of-type {
+  margin-bottom: 0;
+}
+
+.MeetingGroupCardInnerTop {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-bottom: 7px;
+  height: 100%;
+  width: 100%;
+}
+.MeetingGroupCardInnerMiddle {
+  margin-bottom: 3px;
+  padding: 0 2px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.MeetingGroupCardInnerMiddle:last-child {
+  margin-bottom: -2px;
+}
+.MeetingGroupCardInnerBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 5px;
+}
+
+.MeetingGroupCardInnerMiddleLabel {
+  vertical-align: top;
+  margin-right: 5px;
+  white-space: nowrap;
+}
+.Members {
+  display: flex;
+}
+.MembersList {
+  display: block;
+  margin: -4px;
+  padding: 2px;
+  line-height: 18px;
+  text-align: left;
+  white-space: normal;
+  border: 2px solid transparent;
+}
+.MembersList:focus {
+  border: 2px solid black;
+}
+
+.MeetingGroupCardName {
+  flex: 1 0 0;
+  display: block;
+  margin-top: -1px;
+  margin-left: 15px;
+  word-break: break-word;
+  line-height: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--dark-text-color);
+}
+
+.idCopier {
+  flex-shrink: 0;
+  height: 24px;
+  border-radius: var(--inner-border-radius);
+  border: 1px solid var(--inner-border-color);
+}
+.idCopier:not(.hasTooltip) {
+  cursor: initial;
+}
+.idCopier > .insideTabHighlightable {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-radius: calc(var(--inner-border-radius) - 1px);
+  border: none;
+  background-color: var(--empty-cell-color);
+}
+.idCopier:focus > .insideTabHighlightable {
+  border: 2px solid black;
+}
+
+.idCopierColor {
+  align-self: stretch;
+  width: 20px;
+}
+.idCopier:focus .idCopierColor {
+  width: 18px;
+}
+.idCopierContent {
+  flex: 0 0 0;
+  padding: 0 6px 0;
+  line-height: 18px;
+  font-weight: 500;
+  font-family: "Roboto Mono", sans-serif;
+}
+.idCopier:focus .idCopierContent {
+  padding-right: 4px;
+}
+
+.MeetingGroupCardButtonWrapper {
+  flex: 0 0 0;
+  display: inline-block;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.MeetingGroupCardButton {
+  height: 24px;
+  margin-left: 4px;
+  border-radius: var(--inner-border-radius);
+  border: 1px solid var(--inner-border-color);
+}
+.MeetingGroupCardButton > .insideTabHighlightable {
+  display: flex;
+  align-items: center;
+  border-radius: calc(var(--inner-border-radius) - 1px);
+  background-color: var(--empty-cell-color);
+  padding: 0 4px;
+}
+.MeetingGroupCardButtonContent {
+  line-height: 18px;
+  font-family: "Roboto", sans-serif;
+}

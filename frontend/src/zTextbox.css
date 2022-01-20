@@ -1,0 +1,45 @@
+:root {
+  --label-width: 70px;
+  --longer-label-width: 185px;
+}
+
+.TextBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(220px, 80%, 320px);
+  margin-bottom: 10px;
+}
+.TextBox.longer {
+  width: 90%;
+}
+
+.TextBox > label {
+  display: inline-block;
+  width: var(--label-width);
+  text-align: right;
+  line-height: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  color: var(--dark-text-color);
+}
+.longer > label {
+  width: var(--longer-label-width);
+}
+
+.TextBoxInput {
+  display: inline-block;
+  border-radius: var(--inner-border-radius);
+  margin-left: 8px;
+  padding: 3px 8px;
+  width: calc(100% - 8px - var(--label-width));
+  background-color: var(--empty-cell-color);
+}
+.longer > .TextBoxInput {
+  width: calc(100% - 5px - var(--longer-label-width));
+}
+
+.TextBoxInput::placeholder {
+  color: var(--gray-text-color);
+}
